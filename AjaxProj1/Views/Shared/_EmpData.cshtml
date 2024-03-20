@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AjaxLib1.Models.Employee1>
+
+
+<div id="DivUpdate">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.destination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.salary)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.destination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.salary)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="7" align="center">
+                <div id="loader" style="display:none">
+                    <img src="~/Images/icons8-loading.gif" height="70" width="70" />
+                </div>
+                @Ajax.ActionLink("load more ", "Index", "Home",
+               new AjaxOptions()
+               {
+                   HttpMethod = "POST",
+                   InsertionMode = InsertionMode.Replace,
+                   UpdateTargetId = "DivUpdate",
+                   LoadingElementId = "loader"
+               }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
+
+    </table>
+</div>
+
+<script src="~/Scripts/jquery-1.8.0.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
